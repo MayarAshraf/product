@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form (ngSubmit)="addStudent()" #frm="ngForm">
+        <input type="text" #nameInp="ngModel" class="form-control my-4" [(ngModel)]="studentName" name="stdname" placeholder="Enter student name" required pattern="[A-Za-z]{3,}">
+        <div class="alert alert-danger" [hidden]="nameInp.untouched||nameInp.valid">
+          <small [hidden]="!nameInp.errors?.['required']">Name Is Required</small>
+          <small [hidden]="!nameInp.errors?.['pattern']">Name Must be 3 letters at least</small>
+        </div>
+        <input type="number" #ageInp="ngModel" class="form-control my-4" [(ngModel)]="studentAge" name="stdage" placeholder="Enter student age" required pattern="[1-9][9-9]|[2-9][0-9]|1[0-9][0-9]">
+        <div class="alert alert-danger"  [hidden]="ageInp.untouched||ageInp.valid">
+          <small [hidden]="!ageInp.errors?.['required']">Age Is Required</small>
+          <small [hidden]="!ageInp.errors?.['pattern']">Age Must be Greater than 18</small>
+        </div>
+        <button class="btn btn-primary" [disabled]="frm.invalid">Add Student</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students;let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td><button class="btn btn-primary" (click)="remove(i)">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" routerLink="/Select">Next task</button>
+    </div>
+  </div>
+</div>

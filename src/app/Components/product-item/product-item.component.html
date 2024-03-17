@@ -1,0 +1,25 @@
+<app-products [prdList]="prdList2"></app-products>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 text-center" *ngFor="let prd of prdList2">
+      <div class="card">
+        <img [src]="prd.img" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{prd.name}}</h5>
+          <p class="card-text"><strong>Price</strong>{{prd.price}}</p>
+          <!-- <p class="card-text"><strong>Quantity</strong>{{prd.quantity}}</p> -->
+
+            <div [ngSwitch]="prd.quantity" [ngClass]="{'text-warning':prd.quantity==1,'text-danger':prd.quantity==0}">
+              <div *ngSwitchCase="0"><strong>No product available</strong></div>
+              <div *ngSwitchCase="1"><strong>last item!</strong></div>
+              <div *ngSwitchDefault><strong>Quantity </strong>{{prd.quantity}}</div>
+            </div>
+
+
+
+          <a href="#" class="btn btn-primary my-3" [ngClass]="{'btn-warning':prd.quantity==1,'btn-danger':prd.quantity==0}">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
